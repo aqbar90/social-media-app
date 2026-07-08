@@ -4,7 +4,7 @@ export const QUERY_KEYS = {
   },
 
   profile: {
-    me: ['profile', 'me'] as const,
+    currentUser: ['profile', 'current-user'] as const,
     user: (username: string) => ['profile', username] as const,
   },
 
