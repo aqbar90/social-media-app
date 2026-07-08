@@ -1,4 +1,5 @@
 import type { ApiResponse } from '@/types/api/api-response';
+import type { PaginatedResponse } from '@/types/api/pagination';
 import type { ProfileStats } from '@/types/entities/profile-stats';
 import type { User } from '@/types/entities/user';
 
@@ -12,3 +13,5 @@ export type CurrentUserResponse = ApiResponse<CurrentUser>;
 export type UpdateProfileRequest = FormData;
 
 export type UpdateProfileResponse = ApiResponse<User>;
+
+export type CurrentUserPostsResponse = ApiResponse<PaginatedResponse<unknown>>;
