@@ -21,8 +21,12 @@ export const API_ENDPOINTS = {
   },
 
   POSTS: {
+    LIST: '/posts',
+
     CREATE: '/posts',
+
     DETAIL: (postId: number | string) => `/posts/${postId}`,
+
     DELETE: (postId: number | string) => `/posts/${postId}`,
   },
 
