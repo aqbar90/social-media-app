@@ -1,10 +1,12 @@
+import { PaginationParams } from '@/types/api/pagination';
+
 export const QUERY_KEYS = {
   auth: {
     currentUser: ['auth', 'current-user'] as const,
   },
 
   profile: {
-    me: ['profile', 'me'] as const,
+    currentUser: ['profile', 'current-user'] as const,
     user: (username: string) => ['profile', username] as const,
   },
 
@@ -17,11 +19,13 @@ export const QUERY_KEYS = {
   },
 
   feed: {
-    list: ['feed'] as const,
+    list: (params: PaginationParams) => ['feed', params] as const,
   },
 
   posts: {
-    detail: (postId: number | string) => ['posts', postId] as const,
+    list: (params: PaginationParams) => ['posts', params] as const,
+
+    detail: (postId: number) => ['posts', postId] as const,
   },
 
   comments: {
