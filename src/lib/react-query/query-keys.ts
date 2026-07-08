@@ -1,3 +1,5 @@
+import { PaginationParams } from '@/types/api/pagination';
+
 export const QUERY_KEYS = {
   auth: {
     currentUser: ['auth', 'current-user'] as const,
@@ -17,7 +19,7 @@ export const QUERY_KEYS = {
   },
 
   feed: {
-    list: ['feed'] as const,
+    list: (params: PaginationParams) => ['feed', params] as const,
   },
 
   posts: {
