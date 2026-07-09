@@ -44,8 +44,17 @@ export const QUERY_KEYS = {
     mySaved: ['saved', 'me'] as const,
   },
 
-  follows: {
-    myFollowers: ['follow', 'me', 'followers'] as const,
-    myFollowing: ['follow', 'me', 'following'] as const,
+  follow: {
+    followers: (username: string, params: PaginationParams) =>
+      ['follow', 'followers', username, params] as const,
+
+    following: (username: string, params: PaginationParams) =>
+      ['follow', 'following', username, params] as const,
+
+    myFollowers: (params: PaginationParams) =>
+      ['follow', 'me', 'followers', params] as const,
+
+    myFollowing: (params: PaginationParams) =>
+      ['follow', 'me', 'following', params] as const,
   },
 } as const;

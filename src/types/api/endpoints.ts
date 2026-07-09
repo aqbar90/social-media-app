@@ -54,12 +54,17 @@ export const API_ENDPOINTS = {
     MY_SAVED: '/me/saved',
   },
 
-  FOLLOWS: {
+  FOLLOW: {
     FOLLOW: (username: string) => `/follow/${username}`,
+
     UNFOLLOW: (username: string) => `/follow/${username}`,
+
     FOLLOWERS: (username: string) => `/users/${username}/followers`,
+
     FOLLOWING: (username: string) => `/users/${username}/following`,
+
     MY_FOLLOWERS: '/me/followers',
+
     MY_FOLLOWING: '/me/following',
   },
 } as const;
