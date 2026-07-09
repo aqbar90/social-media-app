@@ -40,8 +40,11 @@ export const API_ENDPOINTS = {
 
   LIKES: {
     LIKE: (postId: number | string) => `/posts/${postId}/like`,
+
     UNLIKE: (postId: number | string) => `/posts/${postId}/like`,
+
     LIST: (postId: number | string) => `/posts/${postId}/likes`,
+
     MY_LIKES: '/me/likes',
   },
 

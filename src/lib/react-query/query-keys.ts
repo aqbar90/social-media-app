@@ -34,8 +34,10 @@ export const QUERY_KEYS = {
   },
 
   likes: {
-    list: (postId: number | string) => ['posts', postId, 'likes'] as const,
-    myLikes: ['likes', 'me'] as const,
+    list: (postId: number, params: PaginationParams) =>
+      ['likes', postId, params] as const,
+
+    my: (params: PaginationParams) => ['likes', 'me', params] as const,
   },
 
   saves: {
