@@ -32,7 +32,9 @@ export const API_ENDPOINTS = {
 
   COMMENTS: {
     LIST: (postId: number | string) => `/posts/${postId}/comments`,
+
     CREATE: (postId: number | string) => `/posts/${postId}/comments`,
+
     DELETE: (commentId: number | string) => `/comments/${commentId}`,
   },
 

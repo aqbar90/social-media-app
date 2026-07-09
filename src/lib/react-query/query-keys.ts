@@ -29,7 +29,8 @@ export const QUERY_KEYS = {
   },
 
   comments: {
-    list: (postId: number | string) => ['posts', postId, 'comments'] as const,
+    list: (postId: number, params: PaginationParams) =>
+      ['comments', postId, params] as const,
   },
 
   likes: {
