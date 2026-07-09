@@ -29,20 +29,32 @@ export const QUERY_KEYS = {
   },
 
   comments: {
-    list: (postId: number | string) => ['posts', postId, 'comments'] as const,
+    list: (postId: number, params: PaginationParams) =>
+      ['comments', postId, params] as const,
   },
 
   likes: {
-    list: (postId: number | string) => ['posts', postId, 'likes'] as const,
-    myLikes: ['likes', 'me'] as const,
+    list: (postId: number, params: PaginationParams) =>
+      ['likes', postId, params] as const,
+
+    my: (params: PaginationParams) => ['likes', 'me', params] as const,
   },
 
-  saves: {
-    mySaved: ['saved', 'me'] as const,
+  save: {
+    my: (params: PaginationParams) => ['save', 'me', params] as const,
   },
 
-  follows: {
-    myFollowers: ['follow', 'me', 'followers'] as const,
-    myFollowing: ['follow', 'me', 'following'] as const,
+  follow: {
+    followers: (username: string, params: PaginationParams) =>
+      ['follow', 'followers', username, params] as const,
+
+    following: (username: string, params: PaginationParams) =>
+      ['follow', 'following', username, params] as const,
+
+    myFollowers: (params: PaginationParams) =>
+      ['follow', 'me', 'followers', params] as const,
+
+    myFollowing: (params: PaginationParams) =>
+      ['follow', 'me', 'following', params] as const,
   },
 } as const;
