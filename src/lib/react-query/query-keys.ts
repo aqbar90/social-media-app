@@ -40,8 +40,8 @@ export const QUERY_KEYS = {
     my: (params: PaginationParams) => ['likes', 'me', params] as const,
   },
 
-  saves: {
-    mySaved: ['saved', 'me'] as const,
+  save: {
+    my: (params: PaginationParams) => ['save', 'me', params] as const,
   },
 
   follow: {

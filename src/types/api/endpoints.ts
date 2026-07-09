@@ -48,9 +48,11 @@ export const API_ENDPOINTS = {
     MY_LIKES: '/me/likes',
   },
 
-  SAVES: {
+  SAVE: {
     SAVE: (postId: number | string) => `/posts/${postId}/save`,
+
     UNSAVE: (postId: number | string) => `/posts/${postId}/save`,
+
     MY_SAVED: '/me/saved',
   },
 
