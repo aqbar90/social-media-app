@@ -5,7 +5,11 @@ import { AuthLogo } from '@/components/shared/auth/AuthLogo';
 import { AuthTitle } from '@/components/shared/auth/AuthTitle';
 import { LoginForm } from '@/features/auth/components/LoginForm';
 
-export function LoginPage() {
+interface LoginPageProps {
+  initialEmail?: string;
+}
+
+export function LoginPage({ initialEmail = '' }: LoginPageProps) {
   return (
     <AuthLayout>
       <AuthBackground />
@@ -15,7 +19,7 @@ export function LoginPage() {
 
         <AuthTitle title='Welcome Back!' />
 
-        <LoginForm />
+        <LoginForm initialEmail={initialEmail} />
       </AuthCard>
     </AuthLayout>
   );
