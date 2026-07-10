@@ -15,9 +15,11 @@ import {
 
 import { PasswordField } from './PasswordField';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { setAccessToken, setCurrentUser } from '@/lib/auth/auth-storage';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 export function LoginForm() {
   const loginMutation = useLogin();
@@ -25,6 +27,7 @@ export function LoginForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -34,6 +37,19 @@ export function LoginForm() {
     },
   });
 
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const email = searchParams.get('email');
+
+    if (email) {
+      reset({
+        email,
+        password: '',
+      });
+    }
+  }, [searchParams, reset]);
+
   const router = useRouter();
 
   const onSubmit = (values: LoginFormValues) => {
@@ -42,7 +58,11 @@ export function LoginForm() {
         setAccessToken(data.token);
         setCurrentUser(data.user);
 
-        router.replace('/feed');
+        toast.success('Login successful.');
+
+        setTimeout(() => {
+          router.replace('/feed');
+        }, 800);
       },
     });
   };
@@ -64,7 +84,7 @@ export function LoginForm() {
           id='email'
           type='email'
           placeholder='Enter your email'
-          autoComplete='email'
+          autoComplete='username'
           {...register('email')}
           className='h-12 rounded-xl border-border-primary bg-surface-inverse px-4 py-2 text-md tracking-tight font-normal text-text-inverse placeholder:text-text-placeholder focus-visible:border-border-focus focus-visible:ring-0'
         />
