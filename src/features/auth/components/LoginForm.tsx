@@ -15,40 +15,29 @@ import {
 
 import { PasswordField } from './PasswordField';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { setAccessToken, setCurrentUser } from '@/lib/auth/auth-storage';
-import { useEffect } from 'react';
 import { toast } from 'sonner';
 
-export function LoginForm() {
+interface LoginFormProps {
+  initialEmail?: string;
+}
+
+export function LoginForm({ initialEmail = '' }: LoginFormProps) {
   const loginMutation = useLogin();
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
+      email: initialEmail,
       password: '',
     },
   });
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const email = searchParams.get('email');
-
-    if (email) {
-      reset({
-        email,
-        password: '',
-      });
-    }
-  }, [searchParams, reset]);
 
   const router = useRouter();
 
