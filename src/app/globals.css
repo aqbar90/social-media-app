@@ -1,0 +1,879 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+/* ==========================================
+   FONT FACE
+========================================== */
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../assets/fonts/sfprodisplayregular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../assets/fonts/sfprodisplaymedium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../assets/fonts/sfprodisplaymedium.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../assets/fonts/sfprodisplaybold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../assets/fonts/sfprodisplaybold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ============================================================
+   FONT
+   ============================================================ */
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  /* ============================================================
+   COLORS
+   ============================================================ */
+
+  /* Background */
+  --color-background: var(--background);
+
+  /* Text */
+  --color-foreground: var(--text-primary);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-placeholder: var(--text-placeholder);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-brand: var(--text-brand);
+  --color-text-success: var(--text-success);
+  --color-text-warning: var(--text-warning);
+  --color-text-danger: var(--text-danger);
+
+  /* Surface */
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-brand: var(--surface-brand);
+  --color-surface-inverse: var(--surface-inverse);
+
+  /* Brand */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Border */
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-muted: var(--border-muted);
+  --color-border-focus: var(--border-focus);
+  --color-border-success: var(--border-success);
+  --color-border-warning: var(--border-warning);
+  --color-border-danger: var(--border-danger);
+
+  /* Input */
+  --color-input: var(--input);
+
+  /* Focus */
+  --color-ring: var(--focus-ring);
+
+  /* State */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+  --text-display-3xl: var(--font-size-display-3xl);
+  --text-display-3xl--line-height: var(--line-height-display-3xl);
+
+  --text-display-2xl: var(--font-size-display-2xl);
+  --text-display-2xl--line-height: var(--line-height-display-2xl);
+
+  --text-display-xl: var(--font-size-display-xl);
+  --text-display-xl--line-height: var(--line-height-display-xl);
+
+  --text-display-lg: var(--font-size-display-lg);
+  --text-display-lg--line-height: var(--line-height-display-lg);
+
+  --text-display-md: var(--font-size-display-md);
+  --text-display-md--line-height: var(--line-height-display-md);
+
+  --text-display-sm: var(--font-size-display-sm);
+  --text-display-sm--line-height: var(--line-height-display-sm);
+
+  --text-display-xs: var(--font-size-display-xs);
+  --text-display-xs--line-height: var(--line-height-display-xs);
+
+  --text-xl: var(--font-size-text-xl);
+  --text-xl--line-height: var(--line-height-text-xl);
+
+  --text-lg: var(--font-size-text-lg);
+  --text-lg--line-height: var(--line-height-text-lg);
+
+  --text-md: var(--font-size-text-md);
+  --text-md--line-height: var(--line-height-text-md);
+
+  --text-sm: var(--font-size-text-sm);
+  --text-sm--line-height: var(--line-height-text-sm);
+
+  --text-xs: var(--font-size-text-xs);
+  --text-xs--line-height: var(--line-height-text-xs);
+
+  /* ============================================================
+   SPACING
+   ============================================================ */
+
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+  --spacing-3xl: var(--space-3xl);
+  --spacing-4xl: var(--space-4xl);
+  --spacing-5xl: var(--space-5xl);
+  --spacing-6xl: var(--space-6xl);
+  --spacing-7xl: var(--space-7xl);
+  --spacing-8xl: var(--space-8xl);
+
+  /* ============================================================
+   RADIUS
+   ============================================================ */
+
+  --radius-none: var(--radius-none);
+  --radius-2xs: var(--radius-2xs);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+  --radius-full: var(--radius-full);
+
+  /* ============================================================
+   SHADOW
+   ============================================================ */
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  --container-auth-mobile: var(--container-auth-mobile);
+
+  --container-auth-desktop: var(--container-auth-desktop);
+
+  --container-content: var(--container-content);
+}
+
+:root {
+  /* ============================================================
+   FOUNDATION TOKENS
+   ============================================================ */
+
+  /* ============================================================
+   BASE
+   ============================================================ */
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ============================================================
+   NEUTRAL
+   ============================================================ */
+
+  --neutral-25: #fdfdfd;
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e9eaeb;
+  --neutral-300: #d5d7da;
+  --neutral-400: #a4a7ae;
+  --neutral-500: #717680;
+  --neutral-600: #535862;
+  --neutral-700: #414651;
+  --neutral-800: #252b37;
+  --neutral-900: #181d27;
+  --neutral-950: #0a0d12;
+
+  /* ============================================================
+   BRAND
+   ============================================================ */
+
+  --primary-100: #f6f9fe;
+  --primary-200: #7f51f9;
+  --primary-300: #6936f2;
+
+  /* ============================================================
+   ACCENT
+   ============================================================ */
+
+  --success-500: #079455;
+  --warning-500: #fdb022;
+  --danger-500: #d9206e;
+
+  /* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+  /* Font Family */
+
+  --font-sans:
+    'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-heading:
+    'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-mono:
+    'SF Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Font Weight */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Display */
+
+  --font-size-display-3xl: 3.75rem;
+  --font-size-display-2xl: 3rem;
+  --font-size-display-xl: 2.5rem;
+  --font-size-display-lg: 2rem;
+  --font-size-display-md: 1.75rem;
+  --font-size-display-sm: 1.5rem;
+  --font-size-display-xs: 1.25rem;
+
+  /* Body */
+
+  --font-size-text-xl: 1.25rem;
+  --font-size-text-lg: 1.125rem;
+  --font-size-text-md: 1rem;
+  --font-size-text-sm: 0.875rem;
+  --font-size-text-xs: 0.75rem;
+
+  /* Line Height */
+
+  --line-height-display-3xl: 1.2;
+  --line-height-display-2xl: 1.2;
+  --line-height-display-xl: 1.2;
+  --line-height-display-lg: 1.2;
+  --line-height-display-md: 1.2;
+  --line-height-display-sm: 1.2;
+  --line-height-display-xs: 1.5;
+
+  --line-height-text-xl: 1.7;
+  --line-height-text-lg: 1.7;
+  --line-height-text-md: 1.875;
+  --line-height-text-sm: 2;
+  --line-height-text-xs: 1.5;
+
+  /* Letter Spacing */
+
+  --tracking-tightest: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+
+  /* ============================================================
+   SPACING
+   ============================================================ */
+
+  --space-none: 0;
+  --space-2xs: 0.125rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.375rem;
+  --space-md: 0.5rem;
+  --space-lg: 0.75rem;
+  --space-xl: 1rem;
+  --space-2xl: 1.25rem;
+  --space-3xl: 1.5rem;
+  --space-4xl: 2rem;
+  --space-5xl: 2.5rem;
+  --space-6xl: 3rem;
+  --space-7xl: 4rem;
+  --space-8xl: 5rem;
+  --space-9xl: 6rem;
+  --space-10xl: 8rem;
+  --space-11xl: 10rem;
+
+  /* ============================================================
+   RADIUS
+   ============================================================ */
+
+  --radius-none: 0;
+  --radius-2xs: 0.125rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ============================================================
+   SHADOW
+   ============================================================ */
+
+  --shadow-xs: 0 1px 2px rgb(10 13 18 / 0.05);
+
+  --shadow-sm: 0 1px 3px rgb(10 13 18 / 0.1), 0 1px 2px rgb(10 13 18 / 0.06);
+
+  --shadow-md: 0 4px 8px rgb(10 13 18 / 0.1), 0 2px 4px rgb(10 13 18 / 0.06);
+
+  --shadow-lg: 0 12px 24px rgb(10 13 18 / 0.12), 0 4px 8px rgb(10 13 18 / 0.08);
+
+  --shadow-xl:
+    0 20px 40px rgb(10 13 18 / 0.16), 0 8px 16px rgb(10 13 18 / 0.08);
+
+  /* ============================================================
+   MOTION
+   ============================================================ */
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ============================================================
+   SYSTEM TOKENS
+   ============================================================ */
+
+  /* Background */
+
+  --background: var(--white);
+
+  /* Brand */
+
+  --primary: var(--primary-300);
+  --primary-foreground: var(--white);
+
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-600);
+
+  /* Input */
+
+  --input: var(--neutral-300);
+
+  /* State */
+
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+
+  /* ============================================================
+   TEXT
+   ============================================================ */
+
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-tertiary: var(--neutral-600);
+  --text-placeholder: var(--neutral-500);
+  --text-disabled: var(--neutral-400);
+  --text-inverse: var(--white);
+  --text-brand: var(--primary-300);
+  --text-success: var(--success-500);
+  --text-warning: var(--warning-500);
+  --text-danger: var(--danger-500);
+
+  /* ============================================================
+   SURFACE
+   ============================================================ */
+
+  --surface-primary: var(--white);
+  --surface-secondary: var(--neutral-25);
+  --surface-tertiary: var(--neutral-50);
+  --surface-muted: var(--neutral-100);
+  --surface-brand: var(--primary-100);
+  --surface-inverse: var(--neutral-900);
+
+  /* ============================================================
+   BORDER
+   ============================================================ */
+
+  --border-primary: var(--neutral-300);
+  --border-secondary: var(--neutral-200);
+  --border-muted: var(--neutral-100);
+  --border-focus: var(--primary-300);
+  --border-success: var(--success-500);
+  --border-warning: var(--warning-500);
+  --border-danger: var(--danger-500);
+
+  /* ============================================================
+   ICON
+   ============================================================ */
+
+  --icon-primary: var(--neutral-900);
+  --icon-secondary: var(--neutral-700);
+  --icon-tertiary: var(--neutral-500);
+  --icon-disabled: var(--neutral-400);
+  --icon-brand: var(--primary-300);
+  --icon-inverse: var(--white);
+
+  /* ============================================================
+   ACTION
+   ============================================================ */
+
+  --action-primary: var(--primary-300);
+  --action-primary-hover: var(--primary-200);
+
+  --action-secondary: var(--neutral-100);
+  --action-secondary-hover: var(--neutral-200);
+
+  --action-danger: var(--danger-500);
+  --action-danger-hover: #c81e65;
+
+  /* ============================================================
+   STATE
+   ============================================================ */
+
+  --state-success: var(--success-500);
+  --state-warning: var(--warning-500);
+  --state-danger: var(--danger-500);
+
+  /* ============================================================
+   OVERLAY
+   ============================================================ */
+
+  --overlay-light: rgb(255 255 255 / 0.72);
+  --overlay-dark: rgb(10 13 18 / 0.64);
+  --overlay-backdrop: rgb(10 13 18 / 0.48);
+
+  /* ============================================================
+   FOCUS
+   ============================================================ */
+
+  --focus-ring: var(--primary-300);
+  --focus-offset: 2px;
+
+  /* ============================================================
+   LAYOUT
+   CONTAINER
+   ============================================================ */
+
+  --container-auth-mobile: 21.5625rem; /* 345px */
+
+  --container-auth-desktop: 27.875rem; /* 446px */
+
+  --container-content: 80rem; /* 1280px */
+}
+
+.dark {
+  /* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+  --background: var(--neutral-950);
+
+  /* ============================================================
+   BRAND
+   ============================================================ */
+
+  --primary: var(--primary-200);
+  --primary-foreground: var(--white);
+
+  --secondary: var(--neutral-800);
+  --secondary-foreground: var(--white);
+
+  --muted: var(--neutral-800);
+  --muted-foreground: var(--neutral-400);
+
+  /* ============================================================
+   INPUT
+   ============================================================ */
+
+  --input: var(--neutral-700);
+
+  /* ============================================================
+   STATE
+   ============================================================ */
+
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+
+  /* ============================================================
+   TEXT
+   ============================================================ */
+
+  --text-primary: var(--white);
+  --text-secondary: var(--neutral-300);
+  --text-tertiary: var(--neutral-400);
+  --text-placeholder: var(--neutral-500);
+  --text-disabled: var(--neutral-600);
+  --text-inverse: var(--neutral-950);
+
+  --text-brand: var(--primary-200);
+
+  --text-success: var(--success-500);
+  --text-warning: var(--warning-500);
+  --text-danger: var(--danger-500);
+
+  /* ============================================================
+   SURFACE
+   ============================================================ */
+
+  --surface-primary: var(--neutral-900);
+  --surface-secondary: var(--neutral-800);
+  --surface-tertiary: var(--neutral-700);
+  --surface-muted: var(--neutral-800);
+  --surface-brand: var(--primary-300);
+  --surface-inverse: var(--white);
+
+  /* ============================================================
+   BORDER
+   ============================================================ */
+
+  --border-primary: var(--neutral-700);
+  --border-secondary: var(--neutral-800);
+  --border-muted: var(--neutral-900);
+
+  --border-focus: var(--primary-200);
+
+  --border-success: var(--success-500);
+  --border-warning: var(--warning-500);
+  --border-danger: var(--danger-500);
+
+  /* ============================================================
+   ICON
+   ============================================================ */
+
+  --icon-primary: var(--white);
+  --icon-secondary: var(--neutral-300);
+  --icon-tertiary: var(--neutral-500);
+  --icon-disabled: var(--neutral-600);
+  --icon-brand: var(--primary-200);
+  --icon-inverse: var(--neutral-950);
+
+  /* ============================================================
+   ACTION
+   ============================================================ */
+
+  --action-primary: var(--primary-200);
+  --action-primary-hover: var(--primary-300);
+
+  --action-secondary: var(--neutral-800);
+  --action-secondary-hover: var(--neutral-700);
+
+  --action-danger: var(--danger-500);
+  --action-danger-hover: #c81e65;
+
+  /* ============================================================
+   OVERLAY
+   ============================================================ */
+
+  --overlay-light: rgb(255 255 255 / 0.08);
+  --overlay-dark: rgb(0 0 0 / 0.72);
+  --overlay-backdrop: rgb(0 0 0 / 0.64);
+
+  /* ============================================================
+   FOCUS
+   ============================================================ */
+
+  --focus-ring: var(--primary-200);
+}
+
+/* ============================================================
+   AUTH THEME
+   ============================================================ */
+
+.auth-theme {
+  --background: var(--black);
+  --foreground: var(--white);
+
+  /* Brand */
+  --primary: var(--primary-300);
+  --primary-foreground: var(--white);
+
+  --secondary: var(--neutral-800);
+  --secondary-foreground: var(--white);
+
+  --muted: var(--neutral-800);
+  --muted-foreground: var(--neutral-400);
+
+  /* Text */
+  --text-primary: var(--white);
+  --text-secondary: var(--neutral-300);
+  --text-tertiary: var(--neutral-400);
+  --text-placeholder: var(--neutral-500);
+  --text-disabled: var(--neutral-600);
+  --text-inverse: var(--white);
+  --text-brand: var(--primary-200);
+
+  /* Surface */
+  --surface-primary: rgb(0 0 0 / 20%);
+  --surface-secondary: var(--neutral-900);
+  --surface-tertiary: var(--neutral-800);
+  --surface-muted: var(--neutral-900);
+  --surface-brand: var(--primary-300);
+  --surface-inverse: var(--neutral-950);
+
+  /* Border */
+  --border-primary: var(--neutral-800);
+  --border-secondary: var(--neutral-700);
+  --border-muted: var(--neutral-900);
+  --border-focus: var(--primary-200);
+
+  /* Icon */
+  --icon-primary: var(--white);
+  --icon-secondary: var(--neutral-300);
+  --icon-tertiary: var(--neutral-500);
+  --icon-disabled: var(--neutral-600);
+  --icon-brand: var(--primary-200);
+
+  /* State */
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+
+  --focus-ring: var(--primary-200);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--border-primary);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: var(--color-scheme);
+  }
+
+  #root {
+    min-height: 100vh;
+    isolation: isolate;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-text-md);
+    line-height: var(--line-height-text-md);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  picture,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+  }
+
+  input,
+  textarea,
+  select {
+    color: inherit;
+    background: transparent;
+    outline: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+  }
+
+  button:disabled,
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  ::-webkit-scrollbar {
+    inline-size: 10px;
+    block-size: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--surface-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-primary);
+    border-radius: var(--radius-full);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--neutral-400);
+  }
+}
+
+@layer utilities {
+  /* ============================================================
+   CONTAINER
+   ============================================================ */
+
+  .container-auth {
+    width: 100%;
+    max-width: var(--container-auth-mobile);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 48rem) {
+    .container-auth {
+      max-width: var(--container-auth-desktop);
+    }
+  }
+
+  /* ============================================================
+   AUTH
+   ============================================================ */
+
+  .auth-layout {
+    @apply relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-8 md:px-6 md:py-12;
+  }
+
+  .auth-card {
+    @apply rounded-2xl border border-border-muted bg-surface-primary/20 backdrop-blur-xl;
+  }
+
+  .auth-card-padding {
+    @apply p-4 md:px-6 md:py-10;
+  }
+
+  /* ============================================================
+   MOTION
+   ============================================================ */
+
+  .transition-fast {
+    transition: all var(--duration-fast) var(--ease-standard);
+  }
+
+  .transition-normal {
+    transition: all var(--duration-normal) var(--ease-standard);
+  }
+
+  .transition-slow {
+    transition: all var(--duration-slow) var(--ease-standard);
+  }
+
+  /* ============================================================
+   LAYOUT
+   ============================================================ */
+
+  .content-width {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+  }
+
+  .section-padding {
+    padding-block: var(--space-8xl);
+  }
+
+  .page-padding {
+    padding-inline: var(--space-xl);
+  }
+
+  @media (min-width: 48rem) {
+    .page-padding {
+      padding-inline: var(--space-3xl);
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .page-padding {
+      padding-inline: var(--space-5xl);
+    }
+  }
+}
