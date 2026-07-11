@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { AuthProvider } from '@/lib/auth';
 import { QueryProvider } from '@/lib/react-query/query-provider';
 
 import './globals.css';
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className='min-h-screen font-sans antialiased'>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ import { PasswordField } from './PasswordField';
 
 import { useRouter } from 'next/navigation';
 
-import { setAccessToken, setCurrentUser } from '@/lib/auth/auth-storage';
+import { useAuth } from '@/lib/auth';
 import { toast } from 'sonner';
 
 interface LoginFormProps {
@@ -41,17 +41,16 @@ export function LoginForm({ initialEmail = '' }: LoginFormProps) {
 
   const router = useRouter();
 
+  const { login } = useAuth();
+
   const onSubmit = (values: LoginFormValues) => {
     loginMutation.mutate(values, {
       onSuccess: ({ data }) => {
-        setAccessToken(data.token);
-        setCurrentUser(data.user);
+        login(data);
 
         toast.success('Login successful.');
 
-        setTimeout(() => {
-          router.replace('/feed');
-        }, 800);
+        router.replace('/feed');
       },
     });
   };
