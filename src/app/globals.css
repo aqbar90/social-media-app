@@ -199,11 +199,31 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
 
+  /* ============================================================
+   CONTAINER
+   ============================================================ */
+
   --container-auth-mobile: var(--container-auth-mobile);
 
   --container-auth-desktop: var(--container-auth-desktop);
 
   --container-content: var(--container-content);
+
+  --container-search: var(--container-search);
+
+  --container-sm: var(--layout-container-sm);
+
+  --container-md: var(--layout-container-md);
+
+  --container-lg: var(--layout-container-lg);
+
+  --navbar-search-width: var(--layout-navbar-search);
+
+  --sidebar-width: var(--layout-sidebar);
+
+  --aside-width: var(--layout-aside);
+
+  --feed-width: var(--layout-feed);
 }
 
 :root {
@@ -501,6 +521,28 @@
   --container-auth-desktop: 27.875rem; /* 446px */
 
   --container-content: 80rem; /* 1280px */
+
+  --layout-container-sm: var(--container-auth-mobile);
+
+  --layout-container-md: var(--container-auth-desktop);
+
+  --layout-container-lg: var(--container-content);
+
+  /* Navbar */
+
+  --layout-navbar-search: 30.6875rem; /* 491px */
+
+  /* Sidebar */
+
+  --layout-sidebar: 17.5rem;
+
+  /* Right Panel */
+
+  --layout-aside: 20rem;
+
+  /* Feed */
+
+  --layout-feed: 40rem;
 }
 
 .dark {
@@ -875,5 +917,31 @@
     .page-padding {
       padding-inline: var(--space-5xl);
     }
+  }
+
+  .layout-container {
+    width: 100%;
+    max-width: var(--layout-container-lg);
+    margin-inline: auto;
+  }
+
+  .layout-feed {
+    width: 100%;
+    max-width: var(--layout-feed);
+  }
+
+  .layout-sidebar {
+    width: 100%;
+    max-width: var(--layout-sidebar);
+  }
+
+  .layout-aside {
+    width: 100%;
+    max-width: var(--layout-aside);
+  }
+
+  .layout-navbar-search {
+    width: 100%;
+    max-width: var(--layout-navbar-search);
   }
 }
