@@ -6,25 +6,31 @@ import CommentSkeleton from './CommentSkeleton';
 import CommentError from './CommentError';
 import CommentEmpty from './CommentEmpty';
 
+import { useDeleteComment } from '../hooks/useDeleteComment';
+
 interface CommentSectionProps {
   postId: number;
 }
 
 export default function CommentSection({ postId }: CommentSectionProps) {
-  const { data, isPending, isError } = useComments(postId, {
+  const commentParams = {
     page: 1,
     limit: 20,
-  });
+  };
 
-  if (isPending) {
-    return <p>Loading comments...</p>;
-  }
+  const { data, isPending, isError } = useComments(postId, commentParams);
 
-  if (isError) {
-    return <p>Failed to load comments.</p>;
-  }
+  const deleteCommentMutation = useDeleteComment();
 
   const comments = data?.data.comments ?? [];
+
+  function handleDeleteComment(commentId: number) {
+    deleteCommentMutation.mutate({
+      commentId,
+      postId,
+      params: commentParams,
+    });
+  }
 
   if (isPending) {
     return <CommentSkeleton />;
@@ -38,17 +44,11 @@ export default function CommentSection({ postId }: CommentSectionProps) {
     return <CommentEmpty />;
   }
 
-  return <CommentList comments={comments} />;
-
   return (
-    <div className='flex flex-col gap-4'>
-      {comments.map((comment) => (
-        <div key={comment.id}>
-          <span className='font-bold'>{comment.author.username}</span>{' '}
-          {comment.text}
-        </div>
-      ))}
-      <CommentList comments={comments} />;
-    </div>
+    <CommentList
+      comments={comments}
+      onDelete={handleDeleteComment}
+      isDeleting={deleteCommentMutation.isPending}
+    />
   );
 }
