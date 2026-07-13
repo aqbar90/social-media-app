@@ -11,6 +11,8 @@ export interface PostsData {
 
 export type PostsResponse = ApiResponse<PostsData>;
 
+export type PostResponse = ApiResponse<Post>;
+
 export type CreatePostRequest = FormData;
 
 export type CreatePostResponse = ApiResponse<Post>;
