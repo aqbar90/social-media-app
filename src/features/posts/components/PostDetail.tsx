@@ -10,7 +10,6 @@ import PostHeader from '@/features/feed/components/post-card/PostHeader';
 import PostMedia from '@/features/feed/components/post-card/PostMedia';
 
 import type { Post } from '@/types/entities/post';
-import { toast } from 'sonner';
 
 interface PostDetailProps {
   post: Post;
@@ -19,22 +18,19 @@ interface PostDetailProps {
 export default function PostDetail({ post }: PostDetailProps) {
   const createCommentMutation = useCreateComment();
 
+  const commentParams = {
+    page: 1,
+    limit: 20,
+  };
+
   function handleCreateComment(values: CreateCommentFormValues) {
-    createCommentMutation.mutate(
-      {
-        postId: post.id,
-        payload: {
-          text: values.text,
-        },
+    createCommentMutation.mutate({
+      postId: post.id,
+      payload: {
+        text: values.text,
       },
-      {
-        onError(error) {
-          toast.error(
-            error instanceof Error ? error.message : 'Failed to create comment.'
-          );
-        },
-      }
-    );
+      params: commentParams,
+    });
   }
 
   return (
