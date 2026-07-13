@@ -17,6 +17,8 @@ export function useDeleteComment() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: QUERY_KEYS.mutation.comments.delete,
+
     mutationFn: ({ commentId }: DeleteCommentMutationVariables) =>
       commentService.deleteComment(commentId),
 
@@ -24,6 +26,8 @@ export function useDeleteComment() {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.comments.list(variables.postId, variables.params),
       });
+
+      toast.success('Comment deleted successfully.');
     },
 
     onError(error) {

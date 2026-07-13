@@ -20,6 +20,8 @@ export function useCreateComment() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: QUERY_KEYS.mutation.comments.create,
+
     mutationFn: ({ postId, payload }: CreateCommentMutationVariables) =>
       commentService.createComment(postId, payload),
 
@@ -27,6 +29,8 @@ export function useCreateComment() {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.comments.list(variables.postId, variables.params),
       });
+
+      toast.success('Comment created successfully.');
     },
 
     onError(error) {

@@ -1,24 +1,20 @@
-import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { authService } from '@/features/auth/services/auth.service';
+import { QUERY_KEYS } from '@/lib/react-query/query-keys';
 
 export function useLogin() {
   return useMutation({
+    mutationKey: QUERY_KEYS.mutation.auth.login,
     mutationFn: authService.login,
 
-    onError: (error) => {
-      if (axios.isAxiosError(error)) {
-        const message = error.response?.data?.message;
+    onSuccess() {
+      toast.success('Login successful.');
+    },
 
-        if (message) {
-          toast.error(message);
-          return;
-        }
-      }
-
-      toast.error('Unexpected server error.');
+    onError(error) {
+      toast.error(error instanceof Error ? error.message : 'Login failed.');
     },
   });
 }

@@ -63,4 +63,40 @@ export const QUERY_KEYS = {
     myFollowing: (params: PaginationParams) =>
       ['follow', 'me', 'following', params] as const,
   },
+
+  mutation: {
+    likes: {
+      like: ['likes', 'like'] as const,
+      unlike: ['likes', 'unlike'] as const,
+    },
+
+    comments: {
+      create: ['comments', 'create'] as const,
+      delete: ['comments', 'delete'] as const,
+    },
+
+    follow: {
+      follow: ['follow', 'follow'] as const,
+      unfollow: ['follow', 'unfollow'] as const,
+    },
+
+    posts: {
+      create: ['posts', 'create'] as const,
+      delete: ['posts', 'delete'] as const,
+    },
+
+    save: {
+      save: ['save', 'save'] as const,
+      unsave: ['save', 'unsave'] as const,
+    },
+
+    profile: {
+      update: ['profile', 'update'] as const,
+    },
+
+    auth: {
+      login: ['auth', 'login'] as const,
+      register: ['auth', 'register'] as const,
+    },
+  },
 } as const;
