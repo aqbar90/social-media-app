@@ -19,13 +19,19 @@ export const QUERY_KEYS = {
   },
 
   feed: {
-    list: (params: PaginationParams) => ['feed', params] as const,
+    all: ['feed'] as const,
+
+    list: (params: PaginationParams) =>
+      [...QUERY_KEYS.feed.all, params] as const,
   },
 
   posts: {
-    list: (params: PaginationParams) => ['posts', params] as const,
+    all: ['posts'] as const,
 
-    detail: (postId: number) => ['posts', postId] as const,
+    list: (params: PaginationParams) =>
+      [...QUERY_KEYS.posts.all, params] as const,
+
+    detail: (id: number) => [...QUERY_KEYS.posts.all, 'detail', id] as const,
   },
 
   comments: {

@@ -6,6 +6,7 @@ import type {
   CreatePostRequest,
   CreatePostResponse,
   DeletePostResponse,
+  PostResponse,
   PostsRequest,
   PostsResponse,
 } from '@/features/posts/types/post';
@@ -16,6 +17,14 @@ async function getPosts(params: PostsRequest): Promise<PostsResponse> {
     {
       params,
     }
+  );
+
+  return data;
+}
+
+async function getPostById(id: number): Promise<PostResponse> {
+  const { data } = await apiClient.get<PostResponse>(
+    API_ENDPOINTS.POSTS.DETAIL(id)
   );
 
   return data;
@@ -42,6 +51,7 @@ async function deletePost(id: number): Promise<DeletePostResponse> {
 
 export const postService = {
   getPosts,
+  getPostById,
   createPost,
   deletePost,
 };

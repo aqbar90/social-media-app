@@ -1,0 +1,19 @@
+import { ImageOff } from 'lucide-react';
+
+export default function FeedEmpty() {
+  return (
+    <section className='flex flex-col items-center justify-center gap-3 py-16 text-center'>
+      <ImageOff className='size-12 text-muted-foreground' />
+
+      <div className='space-y-1'>
+        <h2 className='text-lg font-bold text-foreground'>
+          No posts available
+        </h2>
+
+        <p className='text-sm text-muted-foreground'>
+          Follow more people or check back later.
+        </p>
+      </div>
+    </section>
+  );
+}
