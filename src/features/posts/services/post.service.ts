@@ -33,9 +33,20 @@ async function getPostById(id: number): Promise<PostResponse> {
 async function createPost(
   payload: CreatePostRequest
 ): Promise<CreatePostResponse> {
+  const formData = new FormData();
+
+  formData.append('image', payload.image);
+
+  formData.append('caption', payload.caption);
+
   const { data } = await apiClient.post<CreatePostResponse>(
     API_ENDPOINTS.POSTS.CREATE,
-    payload
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
 
   return data;

@@ -10,26 +10,21 @@ export default function NavbarActions({
   menuOpen,
   onToggleMenu,
 }: NavbarActionsProps) {
+  const authenticatedUser =
+    isAuthenticated && currentUser ? (
+      <NavbarUserMenu currentUser={currentUser} />
+    ) : null;
+
   return (
     <>
       <div className='lg:hidden'>
-        {isAuthenticated ? (
-          currentUser ? (
-            <NavbarUserMenu currentUser={currentUser} />
-          ) : null
-        ) : (
+        {authenticatedUser ?? (
           <NavbarMenuButton open={menuOpen} onToggle={onToggleMenu} />
         )}
       </div>
 
       <div className='hidden lg:flex'>
-        {isAuthenticated ? (
-          currentUser ? (
-            <NavbarUserMenu currentUser={currentUser} />
-          ) : null
-        ) : (
-          <NavbarGuestActions />
-        )}
+        {authenticatedUser ?? <NavbarGuestActions />}
       </div>
     </>
   );
