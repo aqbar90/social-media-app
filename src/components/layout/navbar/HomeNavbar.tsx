@@ -2,10 +2,15 @@
 
 import { useAuth } from '@/lib/auth';
 
+import NavbarAccountBoundary from './NavbarAccountBoundary';
 import { Navbar } from './';
 
 export default function HomeNavbar() {
   const { isAuthenticated, currentUser } = useAuth();
 
-  return <Navbar isAuthenticated={isAuthenticated} currentUser={currentUser} />;
+  return (
+    <NavbarAccountBoundary>
+      <Navbar isAuthenticated={isAuthenticated} currentUser={currentUser} />
+    </NavbarAccountBoundary>
+  );
 }

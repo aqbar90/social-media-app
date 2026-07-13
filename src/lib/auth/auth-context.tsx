@@ -9,6 +9,7 @@ import {
   type PropsWithChildren,
 } from 'react';
 
+import type { AuthPayload } from '@/features/auth/types/auth';
 import type { User } from '@/types/entities/user';
 
 import {
@@ -17,7 +18,6 @@ import {
   getSessionUser,
   isAuthenticated,
 } from './auth-session';
-import { AuthPayload } from '@/features/auth/types/auth';
 
 interface AuthState {
   isInitialized: boolean;
@@ -33,26 +33,26 @@ interface AuthContextValue extends AuthState {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-function getInitialAuthState(): AuthState {
-  if (typeof window === 'undefined') {
-    return {
-      isInitialized: false,
-      isAuthenticated: false,
-      currentUser: null,
-    };
-  }
-
-  const authenticated = isAuthenticated();
-
-  return {
-    isInitialized: true,
-    isAuthenticated: authenticated,
-    currentUser: authenticated ? getSessionUser() : null,
-  };
-}
-
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [authState, setAuthState] = useState<AuthState>(getInitialAuthState);
+  const [authState, setAuthState] = useState<AuthState>(() => {
+    const authenticated = isAuthenticated();
+
+    return {
+      isInitialized: true,
+      isAuthenticated: authenticated,
+      currentUser: authenticated ? getSessionUser() : null,
+    };
+  });
+
+  const refresh = useCallback(() => {
+    const authenticated = isAuthenticated();
+
+    setAuthState({
+      isInitialized: true,
+      isAuthenticated: authenticated,
+      currentUser: authenticated ? getSessionUser() : null,
+    });
+  }, []);
 
   const login = useCallback((payload: AuthPayload) => {
     createSession(payload.token, payload.user);
@@ -71,16 +71,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
       isInitialized: true,
       isAuthenticated: false,
       currentUser: null,
-    });
-  }, []);
-
-  const refresh = useCallback(() => {
-    const authenticated = isAuthenticated();
-
-    setAuthState({
-      isInitialized: true,
-      isAuthenticated: authenticated,
-      currentUser: authenticated ? getSessionUser() : null,
     });
   }, []);
 
