@@ -28,9 +28,35 @@ async function getProfile(username: string): Promise<ProfileResponse> {
 async function updateProfile(
   payload: UpdateProfileRequest
 ): Promise<UpdateProfileResponse> {
+  const formData = new FormData();
+
+  if (payload.name !== undefined) {
+    formData.append('name', payload.name);
+  }
+
+  if (payload.username !== undefined) {
+    formData.append('username', payload.username);
+  }
+
+  if (payload.phone !== undefined) {
+    formData.append('phone', payload.phone);
+  }
+
+  if (payload.bio !== undefined) {
+    formData.append('bio', payload.bio);
+  }
+
+  if (payload.avatar !== undefined) {
+    formData.append('avatar', payload.avatar);
+  }
+
+  if (payload.avatarUrl !== undefined) {
+    formData.append('avatarUrl', payload.avatarUrl);
+  }
+
   const { data } = await apiClient.patch<UpdateProfileResponse>(
     API_ENDPOINTS.PROFILE.UPDATE,
-    payload,
+    formData,
     {
       headers: {
         'Content-Type': 'multipart/form-data',

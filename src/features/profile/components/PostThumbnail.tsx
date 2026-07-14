@@ -20,7 +20,7 @@ export default function PostThumbnail({ post }: PostThumbnailProps) {
     >
       <Image
         src={post.imageUrl}
-        alt={post.caption}
+        alt={post.caption ?? `Post by ${post.author.username}`}
         width={400}
         height={400}
         className='size-full object-cover transition duration-300 group-hover:scale-105'

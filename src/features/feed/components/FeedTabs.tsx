@@ -1,6 +1,6 @@
 import FeedTabItem from './FeedTabItem';
 
-export type FeedTab = 'for-you' | 'following';
+export type FeedTab = 'home' | 'for-you';
 
 interface FeedTabsProps {
   activeTab: FeedTab;
@@ -11,15 +11,15 @@ export default function FeedTabs({ activeTab, onTabChange }: FeedTabsProps) {
   return (
     <nav className='flex items-center border-b'>
       <FeedTabItem
-        label='For You'
-        active={activeTab === 'for-you'}
-        onClick={() => onTabChange('for-you')}
+        label='Home'
+        active={activeTab === 'home'}
+        onClick={() => onTabChange('home')}
       />
 
       <FeedTabItem
-        label='Following'
-        active={activeTab === 'following'}
-        onClick={() => onTabChange('following')}
+        label='For You'
+        active={activeTab === 'for-you'}
+        onClick={() => onTabChange('for-you')}
       />
     </nav>
   );

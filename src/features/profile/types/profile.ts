@@ -14,7 +14,19 @@ export type CurrentUserResponse = ApiResponse<CurrentUser>;
 
 export type ProfileResponse = ApiResponse<ProfileDto>;
 
-export type UpdateProfileRequest = FormData;
+export interface UpdateProfileRequest {
+  name?: string;
+
+  username?: string;
+
+  phone?: string;
+
+  bio?: string;
+
+  avatar?: File;
+
+  avatarUrl?: string;
+}
 
 export type UpdateProfileResponse = ApiResponse<User>;
 
