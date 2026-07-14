@@ -4,13 +4,15 @@ import { useState } from 'react';
 
 interface PostContentProps {
   username: string;
-  caption: string;
+  caption: string | null;
 }
 
 export default function PostContent({ username, caption }: PostContentProps) {
   const [expanded, setExpanded] = useState(false);
 
-  const shouldShowToggle = caption.length > 120;
+  const content = caption ?? '';
+
+  const shouldShowToggle = content.length > 120;
 
   return (
     <div className='flex flex-col gap-1'>
@@ -21,7 +23,7 @@ export default function PostContent({ username, caption }: PostContentProps) {
             expanded ? 'text-foreground' : 'line-clamp-2 text-foreground'
           }
         >
-          {caption}
+          {content}
         </span>
       </p>
 

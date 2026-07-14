@@ -4,8 +4,9 @@ import { useState } from 'react';
 
 import FeedTabs, { type FeedTab } from './FeedTabs';
 
-import MyFeedSection from '../containers/MyFeedSection';
 import FollowingSection from '../containers/FollowingSection';
+import ForYouSection from '../containers/ForYouSection';
+import MyFeedSection from '../containers/MyFeedSection';
 
 export default function FeedLayout() {
   const [activeTab, setActiveTab] = useState<FeedTab>('for-you');
@@ -15,7 +16,11 @@ export default function FeedLayout() {
       <div className='flex flex-col gap-6'>
         <FeedTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-        {activeTab === 'for-you' ? <MyFeedSection /> : <FollowingSection />}
+        {activeTab === 'my-posts' && <MyFeedSection />}
+
+        {activeTab === 'for-you' && <ForYouSection />}
+
+        {activeTab === 'following' && <FollowingSection />}
       </div>
     </main>
   );
