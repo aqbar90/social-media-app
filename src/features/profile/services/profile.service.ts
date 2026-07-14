@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from '@/types/api/endpoints';
 
 import type {
   CurrentUserResponse,
+  ProfileResponse,
   UpdateProfileRequest,
   UpdateProfileResponse,
 } from '@/features/profile/types/profile';
@@ -11,6 +12,14 @@ import type {
 async function getCurrentUser(): Promise<CurrentUserResponse> {
   const { data } = await apiClient.get<CurrentUserResponse>(
     API_ENDPOINTS.PROFILE.ME
+  );
+
+  return data;
+}
+
+async function getProfile(username: string): Promise<ProfileResponse> {
+  const { data } = await apiClient.get<ProfileResponse>(
+    API_ENDPOINTS.USERS.DETAIL(username)
   );
 
   return data;
@@ -34,5 +43,6 @@ async function updateProfile(
 
 export const profileService = {
   getCurrentUser,
+  getProfile,
   updateProfile,
 };

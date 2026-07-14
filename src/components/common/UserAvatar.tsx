@@ -22,7 +22,7 @@ export default function UserAvatar({
       alt={alt}
       width={size}
       height={size}
-      className={cn('rounded-full object-cover', className)}
+      className={cn('size-10 rounded-full object-cover', className)}
     />
   );
 }
