@@ -6,6 +6,7 @@ import { followService } from '@/features/follow/services/follow.service';
 import { updateProfileFollowState } from '@/features/follow/utils/updateProfileFollowState';
 import { QUERY_KEYS } from '@/lib/react-query/query-keys';
 
+import type { ApiResponse } from '@/types/api/api-response';
 import type { Profile } from '@/types/entities/profile';
 
 export function useUnfollowUser() {
@@ -21,11 +22,11 @@ export function useUnfollowUser() {
         queryKey: QUERY_KEYS.profile.user(username),
       });
 
-      const previousProfile = queryClient.getQueryData<Profile>(
+      const previousProfile = queryClient.getQueryData<ApiResponse<Profile>>(
         QUERY_KEYS.profile.user(username)
       );
 
-      queryClient.setQueryData<Profile>(
+      queryClient.setQueryData<ApiResponse<Profile>>(
         QUERY_KEYS.profile.user(username),
         (old) => updateProfileFollowState(old, false)
       );
@@ -38,7 +39,7 @@ export function useUnfollowUser() {
 
     onError: (error, _username, context) => {
       if (context?.previousProfile) {
-        queryClient.setQueryData(
+        queryClient.setQueryData<ApiResponse<Profile>>(
           QUERY_KEYS.profile.user(context.username),
           context.previousProfile
         );
@@ -51,6 +52,11 @@ export function useUnfollowUser() {
 
     onSuccess: () => {
       toast.success('User unfollowed successfully.');
+    },
+    onSettled: async (_data, _error, username) => {
+      await queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.profile.user(username),
+      });
     },
   });
 }

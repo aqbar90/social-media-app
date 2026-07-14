@@ -1,14 +1,18 @@
 import { updateFollowState } from './updateFollowState';
 
+import type { ApiResponse } from '@/types/api/api-response';
 import type { Profile } from '@/types/entities/profile';
 
 export function updateProfileFollowState(
-  profile: Profile | undefined,
+  profile: ApiResponse<Profile> | undefined,
   following: boolean
-): Profile | undefined {
+): ApiResponse<Profile> | undefined {
   if (!profile) {
     return profile;
   }
 
-  return updateFollowState(profile, following);
+  return {
+    ...profile,
+    data: updateFollowState(profile.data, following),
+  };
 }
