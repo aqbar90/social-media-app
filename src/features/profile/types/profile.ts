@@ -3,6 +3,7 @@ import type { PaginatedResponse } from '@/types/api/pagination';
 import type { Post } from '@/types/entities/post';
 import type { ProfileStats } from '@/types/entities/profile-stats';
 import type { User } from '@/types/entities/user';
+import { ProfileDto } from './profile.dto';
 
 export interface CurrentUser {
   profile: User;
@@ -10,6 +11,8 @@ export interface CurrentUser {
 }
 
 export type CurrentUserResponse = ApiResponse<CurrentUser>;
+
+export type ProfileResponse = ApiResponse<ProfileDto>;
 
 export type UpdateProfileRequest = FormData;
 
