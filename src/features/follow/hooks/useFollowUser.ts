@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { toast } from 'sonner';
 
-import { updateProfileFollowState } from '@/features/follow/utils/updateProfileFollowState';
 import { followService } from '@/features/follow/services/follow.service';
+import { updateProfileFollowState } from '@/features/follow/utils/updateProfileFollowState';
 import { QUERY_KEYS } from '@/lib/react-query/query-keys';
+
+import type { ApiResponse } from '@/types/api/api-response';
 import type { Profile } from '@/types/entities/profile';
 
 export function useFollowUser() {
@@ -20,11 +22,11 @@ export function useFollowUser() {
         queryKey: QUERY_KEYS.profile.user(username),
       });
 
-      const previousProfile = queryClient.getQueryData<Profile>(
+      const previousProfile = queryClient.getQueryData<ApiResponse<Profile>>(
         QUERY_KEYS.profile.user(username)
       );
 
-      queryClient.setQueryData<Profile>(
+      queryClient.setQueryData<ApiResponse<Profile>>(
         QUERY_KEYS.profile.user(username),
         (old) => updateProfileFollowState(old, true)
       );
@@ -37,7 +39,7 @@ export function useFollowUser() {
 
     onError: (error, _username, context) => {
       if (context?.previousProfile) {
-        queryClient.setQueryData(
+        queryClient.setQueryData<ApiResponse<Profile>>(
           QUERY_KEYS.profile.user(context.username),
           context.previousProfile
         );
@@ -50,6 +52,11 @@ export function useFollowUser() {
 
     onSuccess: () => {
       toast.success('User followed successfully.');
+    },
+    onSettled: async (_data, _error, username) => {
+      await queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.profile.user(username),
+      });
     },
   });
 }

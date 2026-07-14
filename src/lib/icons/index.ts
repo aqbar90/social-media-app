@@ -6,6 +6,7 @@ import {
   Message,
   SearchNormal1,
   Send2,
+  TickCircle,
   Trash,
 } from 'iconsax-reactjs';
 
@@ -26,3 +27,5 @@ export const DeleteIcon = createIcon(Trash);
 export const BackIcon = createIcon(ArrowLeft2);
 
 export const SearchIcon = createIcon(SearchNormal1);
+
+export const CheckCircleIcon = createIcon(TickCircle);
