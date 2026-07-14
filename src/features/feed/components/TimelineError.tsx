@@ -1,10 +1,10 @@
 import { TriangleAlert } from 'lucide-react';
 
-interface FeedErrorProps {
+interface TimelineErrorProps {
   onRetry: () => void;
 }
 
-export default function FeedError({ onRetry }: FeedErrorProps) {
+export default function TimelineError({ onRetry }: TimelineErrorProps) {
   return (
     <section className='flex flex-col items-center justify-center gap-4 py-16 text-center'>
       <TriangleAlert className='size-12 text-destructive' />

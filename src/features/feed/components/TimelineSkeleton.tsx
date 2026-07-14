@@ -1,10 +1,10 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-interface FeedSkeletonProps {
+interface TimelineSkeletonProps {
   count?: number;
 }
 
-export default function FeedSkeleton({ count = 3 }: FeedSkeletonProps) {
+export default function TimelineSkeleton({ count = 3 }: TimelineSkeletonProps) {
   return (
     <section className='flex flex-col gap-8'>
       {Array.from({ length: count }).map((_, index) => (
