@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type PropsWithChildren,
@@ -33,16 +34,14 @@ interface AuthContextValue extends AuthState {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export function AuthProvider({ children }: PropsWithChildren) {
-  const [authState, setAuthState] = useState<AuthState>(() => {
-    const authenticated = isAuthenticated();
+const INITIAL_AUTH_STATE: AuthState = {
+  isInitialized: false,
+  isAuthenticated: false,
+  currentUser: null,
+};
 
-    return {
-      isInitialized: true,
-      isAuthenticated: authenticated,
-      currentUser: authenticated ? getSessionUser() : null,
-    };
-  });
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [authState, setAuthState] = useState<AuthState>(INITIAL_AUTH_STATE);
 
   const refresh = useCallback(() => {
     const authenticated = isAuthenticated();
@@ -53,6 +52,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
       currentUser: authenticated ? getSessionUser() : null,
     });
   }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   const login = useCallback((payload: AuthPayload) => {
     createSession(payload.token, payload.user);

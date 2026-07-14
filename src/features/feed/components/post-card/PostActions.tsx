@@ -8,7 +8,7 @@ import SaveButton from './SaveButton';
 import type { Post } from '@/types/entities/post';
 import { useLikePost } from '@/features/likes/hooks/useLikePost';
 import { useUnlikePost } from '@/features/likes/hooks/useUnlikePost';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface PostActionsProps {
   post: Post;
