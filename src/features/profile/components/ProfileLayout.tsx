@@ -7,8 +7,9 @@ import ProfileHeader from './ProfileHeader';
 import ProfileStats from './ProfileStats';
 import ProfileTabs, { type ProfileTab } from './ProfileTabs';
 
+import { SavedSection } from '@/features/save/components';
+
 import type { Profile } from '@/types/entities/profile';
-import SavedGallery from './SavedGallery';
 
 interface ProfileLayoutProps {
   profile: Profile;
@@ -33,7 +34,7 @@ export default function ProfileLayout({
         {activeTab === 'gallery' ? (
           <ProfileGallery username={username} />
         ) : (
-          <SavedGallery />
+          <SavedSection />
         )}
       </div>
     </main>
