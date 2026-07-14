@@ -1,6 +1,6 @@
 import { ImageOff } from 'lucide-react';
 
-export default function FeedEmpty() {
+export default function TimelineEmpty() {
   return (
     <section className='flex flex-col items-center justify-center gap-3 py-16 text-center'>
       <ImageOff className='size-12 text-muted-foreground' />

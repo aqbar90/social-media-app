@@ -2,11 +2,11 @@ import PostCard from './post-card/PostCard';
 
 import type { Post } from '@/types/entities/post';
 
-interface FeedListProps {
+interface TimelineListProps {
   posts: Post[];
 }
 
-export default function FeedList({ posts }: FeedListProps) {
+export default function TimelineList({ posts }: TimelineListProps) {
   return (
     <section className='flex flex-col gap-8'>
       {posts.map((post) => (
