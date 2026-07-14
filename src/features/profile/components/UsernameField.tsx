@@ -1,21 +1,18 @@
+import { ComponentProps } from 'react';
+
 import { Input } from '@/components/ui/input';
 
 import ProfileField from './ProfileField';
 
-interface UsernameFieldProps {
-  value?: string;
-  placeholder?: string;
+interface UsernameFieldProps extends ComponentProps<typeof Input> {
   helperText?: string;
   error?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function UsernameField({
-  value,
-  placeholder,
   helperText,
   error,
-  onChange,
+  ...props
 }: UsernameFieldProps) {
   return (
     <ProfileField
@@ -24,13 +21,7 @@ export default function UsernameField({
       helperText={helperText}
       error={error}
     >
-      <Input
-        id='username'
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        aria-invalid={!!error}
-      />
+      <Input id='username' aria-invalid={!!error} {...props} />
     </ProfileField>
   );
 }

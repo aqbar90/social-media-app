@@ -1,21 +1,20 @@
 import { Button } from '@/components/ui/button';
 
-interface SaveChangesButtonProps {
-  disabled?: boolean;
+import type { ComponentProps } from 'react';
+
+interface SaveChangesButtonProps extends ComponentProps<typeof Button> {
   loading?: boolean;
 }
 
 export default function SaveChangesButton({
-  disabled = false,
   loading = false,
+  disabled,
+  children,
+  ...props
 }: SaveChangesButtonProps) {
   return (
-    <Button
-      type='submit'
-      disabled={disabled || loading}
-      className='h-12 w-full rounded-full'
-    >
-      {loading ? 'Saving...' : 'Save Changes'}
+    <Button {...props} disabled={loading || disabled}>
+      {loading ? 'Saving...' : (children ?? 'Save Changes')}
     </Button>
   );
 }

@@ -1,21 +1,18 @@
+import { ComponentProps } from 'react';
+
 import { Textarea } from '@/components/ui/textarea';
 
 import ProfileField from './ProfileField';
 
-interface BioFieldProps {
-  value?: string;
-  placeholder?: string;
+interface BioFieldProps extends ComponentProps<typeof Textarea> {
   helperText?: string;
   error?: string;
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
 export default function BioField({
-  value,
-  placeholder,
   helperText,
   error,
-  onChange,
+  ...props
 }: BioFieldProps) {
   return (
     <ProfileField
@@ -24,14 +21,7 @@ export default function BioField({
       helperText={helperText}
       error={error}
     >
-      <Textarea
-        id='bio'
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        aria-invalid={!!error}
-        rows={4}
-      />
+      <Textarea id='bio' rows={4} aria-invalid={!!error} {...props} />
     </ProfileField>
   );
 }

@@ -1,21 +1,18 @@
+import { ComponentProps } from 'react';
+
 import { Input } from '@/components/ui/input';
 
 import ProfileField from './ProfileField';
 
-interface PhoneFieldProps {
-  value?: string;
-  placeholder?: string;
+interface PhoneFieldProps extends ComponentProps<typeof Input> {
   helperText?: string;
   error?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function PhoneField({
-  value,
-  placeholder,
   helperText,
   error,
-  onChange,
+  ...props
 }: PhoneFieldProps) {
   return (
     <ProfileField
@@ -24,13 +21,7 @@ export default function PhoneField({
       helperText={helperText}
       error={error}
     >
-      <Input
-        id='phone'
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        aria-invalid={!!error}
-      />
+      <Input id='phone' type='tel' aria-invalid={!!error} {...props} />
     </ProfileField>
   );
 }

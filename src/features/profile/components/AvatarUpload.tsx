@@ -6,14 +6,14 @@ import UserAvatar from '@/components/common/UserAvatar';
 import { Button } from '@/components/ui/button';
 
 interface AvatarUploadProps {
-  avatarUrl?: string | null;
-  username: string;
+  imageUrl?: string | null;
+  alt: string;
   onChange: (file: File) => void;
 }
 
 export default function AvatarUpload({
-  avatarUrl,
-  username,
+  imageUrl,
+  alt,
   onChange,
 }: AvatarUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,12 +34,7 @@ export default function AvatarUpload({
 
   return (
     <div className='flex flex-col items-center gap-4'>
-      <UserAvatar
-        src={avatarUrl}
-        alt={username}
-        size={130}
-        className='size-32.5'
-      />
+      <UserAvatar src={imageUrl} alt={alt} size={130} className='size-32.5' />
 
       <input
         ref={inputRef}

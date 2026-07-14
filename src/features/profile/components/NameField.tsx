@@ -1,21 +1,18 @@
+import { ComponentProps } from 'react';
+
 import { Input } from '@/components/ui/input';
 
 import ProfileField from './ProfileField';
 
-interface NameFieldProps {
-  value?: string;
-  placeholder?: string;
+interface NameFieldProps extends ComponentProps<typeof Input> {
   helperText?: string;
   error?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function NameField({
-  value,
-  placeholder,
   helperText,
   error,
-  onChange,
+  ...props
 }: NameFieldProps) {
   return (
     <ProfileField
@@ -24,13 +21,7 @@ export default function NameField({
       helperText={helperText}
       error={error}
     >
-      <Input
-        id='name'
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        aria-invalid={!!error}
-      />
+      <Input id='name' aria-invalid={!!error} {...props} />
     </ProfileField>
   );
 }
