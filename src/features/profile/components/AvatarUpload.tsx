@@ -38,7 +38,7 @@ export default function AvatarUpload({
         src={avatarUrl}
         alt={username}
         size={130}
-        className='size-[130px]'
+        className='size-32.5'
       />
 
       <input
