@@ -17,11 +17,12 @@ import type { Post } from '@/types/entities/post';
 
 interface PostActionsProps {
   post: Post;
+  onOpenLikes: () => void;
 }
 
 const noop = () => {};
 
-export default function PostActions({ post }: PostActionsProps) {
+export default function PostActions({ post, onOpenLikes }: PostActionsProps) {
   const router = useRouter();
 
   const likeMutation = useLikePost();
@@ -33,15 +34,12 @@ export default function PostActions({ post }: PostActionsProps) {
   const { savedPostIds } = useSavedPostIds();
 
   const isLikePending = likeMutation.isPending || unlikeMutation.isPending;
-
   const isSavePending = saveMutation.isPending || unsaveMutation.isPending;
 
   const isSaved = savedPostIds.has(post.id);
 
   function handleLike() {
-    if (isLikePending) {
-      return;
-    }
+    if (isLikePending) return;
 
     if (post.likedByMe) {
       unlikeMutation.mutate(post.id);
@@ -56,9 +54,7 @@ export default function PostActions({ post }: PostActionsProps) {
   }
 
   function handleSave() {
-    if (isSavePending) {
-      return;
-    }
+    if (isSavePending) return;
 
     if (isSaved) {
       unsaveMutation.mutate(post.id);
@@ -70,8 +66,13 @@ export default function PostActions({ post }: PostActionsProps) {
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex items-center gap-3 lg:gap-4'>
-        <LikeButton post={post} onLike={handleLike} disabled={isLikePending} />
+      <div className='flex items-center gap-3 md:gap-4'>
+        <LikeButton
+          post={post}
+          onLike={handleLike}
+          onOpenLikes={onOpenLikes}
+          disabled={isLikePending}
+        />
 
         <CommentButton post={post} onComment={handleComment} />
 

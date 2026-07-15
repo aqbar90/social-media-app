@@ -9,7 +9,7 @@ interface FeedTabsProps {
 
 export default function FeedTabs({ activeTab, onTabChange }: FeedTabsProps) {
   return (
-    <nav className='flex items-center border-b'>
+    <nav className='flex w-full items-center border-b border-border-primary'>
       <FeedTabItem
         label='Home'
         active={activeTab === 'home'}

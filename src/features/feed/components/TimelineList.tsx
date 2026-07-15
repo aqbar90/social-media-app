@@ -8,7 +8,7 @@ interface TimelineListProps {
 
 export default function TimelineList({ posts }: TimelineListProps) {
   return (
-    <section className='flex flex-col gap-8'>
+    <section className='flex flex-col gap-4 md:gap-6'>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

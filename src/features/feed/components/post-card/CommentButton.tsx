@@ -21,11 +21,11 @@ export default function CommentButton({
       aria-label='View comments'
       disabled={disabled}
       onClick={onComment}
-      className='transition-fast flex items-center gap-1.5 active:scale-95 disabled:pointer-events-none disabled:opacity-50'
+      className='transition-fast flex items-center gap-1.5 hover:opacity-80 disabled:pointer-events-none disabled:opacity-50'
     >
       <CommentIcon />
 
-      <span className='text-sm font-semibold text-foreground lg:text-md'>
+      <span className='text-sm font-semibold text-text-primary md:text-md'>
         {post.commentCount}
       </span>
     </button>

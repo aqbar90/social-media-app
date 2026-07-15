@@ -12,9 +12,8 @@ export default function PostMedia({ imageUrl, username }: PostMediaProps) {
         src={imageUrl}
         alt={`${username}'s post`}
         fill
-        sizes='(min-width: 1024px) 600px, 100vw'
+        sizes='(min-width: 768px) 600px, 100vw'
         className='object-cover'
-        priority={false}
       />
     </div>
   );

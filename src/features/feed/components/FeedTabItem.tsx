@@ -20,10 +20,8 @@ export default function FeedTabItem({
       type='button'
       onClick={onClick}
       className={cn(
-        'flex flex-1 items-center justify-center gap-2 border-b-2 py-3 text-sm font-semibold transition-fast active:scale-95',
-        active
-          ? 'border-foreground text-foreground'
-          : 'border-transparent text-muted-foreground hover:text-foreground'
+        'flex flex-1 items-center justify-center gap-2 border-b-2 border-transparent py-3 text-sm font-semibold text-text-tertiary transition-fast hover:text-text-primary md:text-md',
+        active && 'border-text-primary text-text-primary'
       )}
     >
       {icon}

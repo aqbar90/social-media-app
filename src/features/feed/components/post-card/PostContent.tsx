@@ -15,23 +15,17 @@ export default function PostContent({ username, caption }: PostContentProps) {
   const shouldShowToggle = content.length > 120;
 
   return (
-    <div className='flex flex-col gap-1'>
-      <p className='text-sm lg:text-md'>
-        <span className='font-bold text-foreground'>{username}</span>{' '}
-        <span
-          className={
-            expanded ? 'text-foreground' : 'line-clamp-2 text-foreground'
-          }
-        >
-          {content}
-        </span>
+    <div className='flex flex-col'>
+      <p className='text-sm text-text-primary md:text-md'>
+        <span className='font-bold'>{username}</span>{' '}
+        <span className={expanded ? '' : 'line-clamp-2'}>{content}</span>
       </p>
 
       {shouldShowToggle && (
         <button
           type='button'
           onClick={() => setExpanded((value) => !value)}
-          className='transition-fast w-fit text-sm font-semibold text-primary hover:opacity-80 active:scale-95 lg:text-md'
+          className='w-fit text-sm font-semibold text-text-brand transition-fast md:text-md'
         >
           {expanded ? 'Show Less' : 'Show More'}
         </button>

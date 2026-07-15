@@ -19,7 +19,7 @@ export default function SaveButton({
       aria-label='Save post'
       disabled={disabled}
       onClick={onSave}
-      className='transition-fast active:scale-95 disabled:pointer-events-none disabled:opacity-50'
+      className='transition-fast hover:opacity-80 disabled:pointer-events-none disabled:opacity-50'
     >
       <SaveIcon variant={isSaved ? 'Bold' : 'Linear'} />
     </button>
