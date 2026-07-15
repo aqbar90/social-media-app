@@ -7,7 +7,7 @@ import type { PostsRequest } from '@/features/posts/types/post';
 
 export function usePosts(params: PostsRequest) {
   return useInfiniteQuery({
-    queryKey: QUERY_KEYS.posts.list(params),
+    queryKey: QUERY_KEYS.posts.all,
     initialPageParam: params.page ?? 1,
     queryFn: ({ pageParam }) =>
       postService.getPosts({

@@ -1,5 +1,9 @@
+import Link from 'next/link';
+
 import { UserAvatar } from '@/components/common';
 import { formatRelativeTime } from '@/lib/date/formatRelativeTime';
+import { useAuth } from '@/lib/auth';
+import { getProfileRoute } from '@/lib/navigation/profile-route';
 
 import type { Comment } from '@/types/entities/comment';
 import { Trash2 } from 'lucide-react';
@@ -29,19 +33,34 @@ export default function CommentItem({
   onDelete,
   isDeleting = false,
 }: CommentItemProps) {
+  const { currentUser } = useAuth();
+
+  const profileHref = getProfileRoute({
+    targetUsername: comment.author.username,
+    currentUsername: currentUser?.username,
+  });
+
   return (
     <article className='flex items-start gap-3'>
-      <UserAvatar
-        src={comment.author.avatarUrl}
-        alt={comment.author.username}
-      />
+      <Link
+        href={profileHref}
+        className='shrink-0 transition-opacity hover:opacity-80'
+      >
+        <UserAvatar
+          src={comment.author.avatarUrl}
+          alt={comment.author.username}
+        />
+      </Link>
 
       <div className='flex min-w-0 flex-1 flex-col'>
         <div className='flex items-center justify-between gap-3'>
           <div className='flex items-center gap-2'>
-            <span className='text-sm font-bold text-foreground'>
+            <Link
+              href={profileHref}
+              className='text-sm font-bold text-foreground transition-opacity hover:opacity-80'
+            >
               {comment.author.username}
-            </span>
+            </Link>
 
             <span className='text-xs text-muted-foreground'>
               {formatRelativeTime(comment.createdAt)}
