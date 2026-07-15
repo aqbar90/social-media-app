@@ -4,6 +4,7 @@ import { profileService } from '@/features/profile/services/profile.service';
 import { QUERY_KEYS } from '@/lib/react-query/query-keys';
 
 import { toast } from 'sonner';
+import axios from 'axios';
 
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
@@ -27,9 +28,26 @@ export function useUpdateProfile() {
     },
 
     onError(error) {
-      toast.error(
-        error instanceof Error ? error.message : 'Failed to update profile.'
-      );
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        const message = error.response?.data?.message;
+
+        if (status === 500 && message === 'Something went wrong') {
+          toast.error(
+            'The profile could not be updated. The username or phone number may already be in use.'
+          );
+
+          return;
+        }
+
+        if (typeof message === 'string' && message.length > 0) {
+          toast.error(message);
+
+          return;
+        }
+      }
+
+      toast.error('Failed to update profile.');
     },
   });
 }
