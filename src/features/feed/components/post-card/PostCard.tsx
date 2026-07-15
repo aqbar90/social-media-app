@@ -7,7 +7,7 @@ import PostContent from './PostContent';
 import PostHeader from './PostHeader';
 import PostMedia from './PostMedia';
 
-import LikesDialog from '@/features/likes/components/LikesDialog';
+import LikesDialog from '@/features/likes/components/like-dialog/LikesDialog';
 
 import type { Post } from '@/types/entities/post';
 
