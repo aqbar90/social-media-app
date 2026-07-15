@@ -1,14 +1,19 @@
 'use client';
 
-import LikeButton from './LikeButton';
-import CommentButton from './CommentButton';
-import ShareButton from './ShareButton';
-import SaveButton from './SaveButton';
+import { useRouter } from 'next/navigation';
 
-import type { Post } from '@/types/entities/post';
+import CommentButton from './CommentButton';
+import LikeButton from './LikeButton';
+import SaveButton from './SaveButton';
+import ShareButton from './ShareButton';
+
 import { useLikePost } from '@/features/likes/hooks/useLikePost';
 import { useUnlikePost } from '@/features/likes/hooks/useUnlikePost';
-import { useRouter } from 'next/navigation';
+import { useSavePost } from '@/features/save/hooks/useSavePost';
+import { useSavedPostIds } from '@/features/save/hooks/useSavedPostIds';
+import { useUnsavePost } from '@/features/save/hooks/useUnsavePost';
+
+import type { Post } from '@/types/entities/post';
 
 interface PostActionsProps {
   post: Post;
@@ -22,7 +27,16 @@ export default function PostActions({ post }: PostActionsProps) {
   const likeMutation = useLikePost();
   const unlikeMutation = useUnlikePost();
 
+  const saveMutation = useSavePost();
+  const unsaveMutation = useUnsavePost();
+
+  const { savedPostIds } = useSavedPostIds();
+
   const isLikePending = likeMutation.isPending || unlikeMutation.isPending;
+
+  const isSavePending = saveMutation.isPending || unsaveMutation.isPending;
+
+  const isSaved = savedPostIds.has(post.id);
 
   function handleLike() {
     if (isLikePending) {
@@ -41,6 +55,19 @@ export default function PostActions({ post }: PostActionsProps) {
     router.push(`/posts/${post.id}`);
   }
 
+  function handleSave() {
+    if (isSavePending) {
+      return;
+    }
+
+    if (isSaved) {
+      unsaveMutation.mutate(post.id);
+      return;
+    }
+
+    saveMutation.mutate(post.id);
+  }
+
   return (
     <div className='flex items-center justify-between'>
       <div className='flex items-center gap-3 lg:gap-4'>
@@ -51,7 +78,11 @@ export default function PostActions({ post }: PostActionsProps) {
         <ShareButton onShare={noop} />
       </div>
 
-      <SaveButton onSave={noop} />
+      <SaveButton
+        isSaved={isSaved}
+        onSave={handleSave}
+        disabled={isSavePending}
+      />
     </div>
   );
 }

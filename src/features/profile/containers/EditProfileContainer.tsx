@@ -8,6 +8,7 @@ import ProfileSkeleton from '../components/ProfileSkeleton';
 import { useCurrentUser } from '../hooks/useCurrentUser';
 import { useUpdateProfile } from '../hooks/useUpdateProfile';
 import type { UpdateProfileFormValues } from '../schemas/update-profile.schema';
+
 import { toast } from 'sonner';
 
 export default function EditProfileContainer() {
@@ -25,7 +26,7 @@ export default function EditProfileContainer() {
     return <ProfileError onRetry={() => void currentUserQuery.refetch()} />;
   }
 
-  const { profile } = currentUserQuery.data.data;
+  const profile = currentUserQuery.data.data;
 
   async function handleSubmit(values: UpdateProfileFormValues) {
     const hasProfileChanged =
@@ -49,7 +50,7 @@ export default function EditProfileContainer() {
 
   return (
     <EditProfileForm
-      user={profile}
+      profile={profile}
       isSubmitting={updateProfileMutation.isPending}
       onBack={() => router.back()}
       onSubmit={handleSubmit}

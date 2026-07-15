@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 
 import { ShareIcon, CheckCircleIcon } from '@/lib/icons';
@@ -20,11 +22,12 @@ export default function ProfileActions({ profile }: ProfileActionsProps) {
     <section className='flex items-center gap-3'>
       {profile.isMe ? (
         <Button
+          asChild
           type='button'
           variant='outline'
           className='flex-1 transition-fast active:scale-95'
         >
-          Edit Profile
+          <Link href='/profile/edit'>Edit Profile</Link>
         </Button>
       ) : (
         <Button

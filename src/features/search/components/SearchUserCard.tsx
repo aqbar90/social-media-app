@@ -2,9 +2,12 @@
 
 import Link from 'next/link';
 
-import type { SearchUser } from '../types/search';
+import { useAuth } from '@/lib/auth';
+import { getProfileRoute } from '@/lib/navigation/profile-route';
 
 import UserAvatar from '@/components/common/UserAvatar';
+
+import type { SearchUser } from '../types/search';
 
 interface SearchUserCardProps {
   user: SearchUser;
@@ -15,9 +18,16 @@ export default function SearchUserCard({
   user,
   onSelect,
 }: SearchUserCardProps) {
+  const { currentUser } = useAuth();
+
+  const profileHref = getProfileRoute({
+    targetUsername: user.username,
+    currentUsername: currentUser?.username,
+  });
+
   return (
     <Link
-      href={`/users/${user.username}`}
+      href={profileHref}
       onClick={onSelect}
       className='flex items-center gap-2 rounded-xl p-2 transition-colors hover:bg-surface-secondary'
     >

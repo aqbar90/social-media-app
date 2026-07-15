@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { updateProfileSchema } from '../schemas/update-profile.schema';
 import type { UpdateProfileFormValues } from '../schemas/update-profile.schema';
-import type { User } from '@/types/entities/user';
 
 import AvatarUpload from './AvatarUpload';
 import BioField from './BioField';
@@ -18,15 +17,17 @@ import ProfileField from './ProfileField';
 import SaveChangesButton from './SaveChangesButton';
 import UsernameField from './UsernameField';
 
+import type { Profile } from '@/types/entities/profile';
+
 interface EditProfileFormProps {
-  user: User;
+  profile: Profile;
   onSubmit: (values: UpdateProfileFormValues) => void | Promise<void>;
   isSubmitting?: boolean;
   onBack: () => void;
 }
 
 export default function EditProfileForm({
-  user,
+  profile,
   onSubmit,
   isSubmitting = false,
   onBack,
@@ -40,10 +41,10 @@ export default function EditProfileForm({
   } = useForm<UpdateProfileFormValues>({
     resolver: zodResolver(updateProfileSchema),
     defaultValues: {
-      name: user.name,
-      username: user.username,
-      phone: user.phone ?? '',
-      bio: user.bio ?? '',
+      name: profile.name,
+      username: profile.username,
+      phone: profile.phone ?? '',
+      bio: profile.bio ?? '',
       avatar: undefined,
     },
     mode: 'onBlur',
@@ -51,13 +52,13 @@ export default function EditProfileForm({
 
   useEffect(() => {
     reset({
-      name: user.name,
-      username: user.username,
-      phone: user.phone ?? '',
-      bio: user.bio ?? '',
+      name: profile.name,
+      username: profile.username,
+      phone: profile.phone ?? '',
+      bio: profile.bio ?? '',
       avatar: undefined,
     });
-  }, [reset, user]);
+  }, [reset, profile]);
 
   const avatar = useWatch({
     control,
@@ -74,11 +75,11 @@ export default function EditProfileForm({
 
   const previewUrl = useMemo(() => {
     if (!avatarFile) {
-      return user.avatarUrl ?? null;
+      return profile.avatarUrl ?? null;
     }
 
     return URL.createObjectURL(avatarFile);
-  }, [avatarFile, user.avatarUrl]);
+  }, [avatarFile, profile.avatarUrl]);
 
   useEffect(() => {
     return () => {
@@ -88,7 +89,7 @@ export default function EditProfileForm({
     };
   }, [previewUrl]);
 
-  const avatarSrc = previewUrl ?? user.avatarUrl ?? '';
+  const avatarSrc = previewUrl ?? profile.avatarUrl ?? '';
 
   return (
     <form
@@ -104,7 +105,7 @@ export default function EditProfileForm({
         render={({ field }) => (
           <AvatarUpload
             imageUrl={avatarSrc}
-            alt={user.name}
+            alt={profile.name}
             onChange={field.onChange}
           />
         )}
@@ -123,7 +124,7 @@ export default function EditProfileForm({
       </ProfileField>
 
       <ProfileField label='Email' htmlFor='email'>
-        <EmailField id='email' value={user.email} readOnly />
+        <EmailField id='email' value={profile.email} readOnly />
       </ProfileField>
 
       <ProfileField
