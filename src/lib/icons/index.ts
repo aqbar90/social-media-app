@@ -1,9 +1,12 @@
 import {
+  Add,
   Archive,
   ArrowLeft2,
   ArrowUp,
   Heart,
+  Home2,
   Message,
+  Profile,
   SearchNormal1,
   Send2,
   TickCircle,
@@ -29,3 +32,9 @@ export const BackIcon = createIcon(ArrowLeft2);
 export const SearchIcon = createIcon(SearchNormal1);
 
 export const CheckCircleIcon = createIcon(TickCircle);
+
+export const AddIcon = createIcon(Add);
+
+export const HomeIcon = createIcon(Home2);
+
+export const ProfileIcon = createIcon(Profile);

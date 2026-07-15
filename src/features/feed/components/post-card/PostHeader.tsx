@@ -22,31 +22,31 @@ export default function PostHeader({ author, createdAt }: PostHeaderProps) {
   });
 
   return (
-    <header className='flex items-center gap-2 lg:gap-3'>
+    <header className='flex items-center gap-2 md:gap-3'>
       <Link
         href={profileHref}
-        className='flex min-w-0 flex-1 items-center gap-2 lg:gap-3'
+        className='flex min-w-0 flex-1 items-center gap-2 md:gap-3'
       >
         <UserAvatar
           src={author.avatarUrl}
           alt={author.username}
           size={44}
-          className='lg:size-16'
+          className='md:size-16'
         />
 
-        <div className='min-w-0'>
-          <h3 className='truncate text-sm font-bold text-foreground lg:text-md'>
+        <div className='flex min-w-0 flex-1 flex-col'>
+          <h3 className='truncate text-sm font-bold text-text-primary md:text-md'>
             {author.username}
           </h3>
+
+          <time
+            dateTime={createdAt}
+            className='text-xs text-text-tertiary md:text-sm'
+          >
+            {formatRelativeTime(createdAt)}
+          </time>
         </div>
       </Link>
-
-      <time
-        dateTime={createdAt}
-        className='shrink-0 text-xs text-muted-foreground lg:text-sm'
-      >
-        {formatRelativeTime(createdAt)}
-      </time>
     </header>
   );
 }

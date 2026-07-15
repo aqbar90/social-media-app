@@ -17,7 +17,7 @@ export default function ShareButton({
       aria-label='Share post'
       disabled={disabled}
       onClick={onShare}
-      className='transition-fast active:scale-95 disabled:pointer-events-none disabled:opacity-50'
+      className='transition-fast hover:opacity-80 disabled:pointer-events-none disabled:opacity-50'
     >
       <ShareIcon />
     </button>
