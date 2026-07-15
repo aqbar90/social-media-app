@@ -34,7 +34,7 @@ export function useUpdateProfile() {
 
         if (status === 500 && message === 'Something went wrong') {
           toast.error(
-            'The profile could not be updated. The username or phone number may already be in use.'
+            'The profile could not be updated. The name or phone number may already be in use.'
           );
 
           return;
