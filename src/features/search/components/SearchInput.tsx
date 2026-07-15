@@ -1,43 +1,57 @@
+'use client';
+
 import { Search, X } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 interface SearchInputProps {
-  value?: string;
+  value: string;
   placeholder?: string;
-  onChange?: (value: string) => void;
+  autoFocus?: boolean;
+  onChange: (value: string) => void;
   onClear?: () => void;
-  showClearButton?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 export default function SearchInput({
-  value = '',
+  value,
   placeholder = 'Search',
+  autoFocus = false,
   onChange,
   onClear,
-  showClearButton = false,
+  onBlur,
+  onFocus,
 }: SearchInputProps) {
   return (
-    <div className='flex h-10 w-full items-center gap-2 rounded-full border border-border-primary bg-surface-secondary px-3'>
-      <Search className='size-5 shrink-0 text-text-secondary' />
+    <div className='relative w-full'>
+      <Search className='text-text-placeholder absolute top-1/2 left-4 size-5 -translate-y-1/2' />
 
       <Input
+        type='search'
         value={value}
+        autoFocus={autoFocus}
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='none'
+        spellCheck={false}
         placeholder={placeholder}
-        onChange={(event) => onChange?.(event.target.value)}
-        className='h-auto border-0 bg-transparent p-0 text-sm text-text-primary placeholder:text-text-secondary focus-visible:ring-0'
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={(event) => onChange(event.target.value)}
+        className='bg-surface-primary border-border-primary text-text-primary placeholder:text-text-placeholder h-12 rounded-full border pr-12 pl-11 shadow-none focus-visible:ring-0'
       />
 
-      {showClearButton && (
+      {value.length > 0 && (
         <Button
           type='button'
           variant='ghost'
           size='icon'
           onClick={onClear}
-          className='size-4 shrink-0 p-0'
+          className='absolute top-1/2 right-2 size-8 -translate-y-1/2 rounded-full'
         >
-          <X className='size-4 text-text-secondary' />
+          <X className='size-4' />
         </Button>
       )}
     </div>

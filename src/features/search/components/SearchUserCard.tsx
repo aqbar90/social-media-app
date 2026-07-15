@@ -1,30 +1,37 @@
-import UserAvatar from '@/components/common/UserAvatar';
+'use client';
+
+import Link from 'next/link';
 
 import type { SearchUser } from '../types/search';
 
+import UserAvatar from '@/components/common/UserAvatar';
+
 interface SearchUserCardProps {
   user: SearchUser;
-  onClick?: (user: SearchUser) => void;
+  onSelect?: () => void;
 }
 
-export default function SearchUserCard({ user, onClick }: SearchUserCardProps) {
+export default function SearchUserCard({
+  user,
+  onSelect,
+}: SearchUserCardProps) {
   return (
-    <button
-      type='button'
-      onClick={() => onClick?.(user)}
-      className='flex w-full items-center gap-2 rounded-xl p-1 text-left transition-colors hover:bg-surface-hover'
+    <Link
+      href={`/users/${user.username}`}
+      onClick={onSelect}
+      className='flex items-center gap-2 rounded-xl p-2 transition-colors hover:bg-surface-secondary'
     >
-      <UserAvatar src={user.avatarUrl ?? undefined} alt={user.name} size={48} />
+      <UserAvatar src={user.avatarUrl} alt={user.name} size={48} />
 
-      <div className='flex min-w-0 flex-1 flex-col justify-center'>
-        <p className='truncate text-sm font-bold tracking-tight text-text-primary'>
+      <div className='flex min-w-0 flex-1 flex-col'>
+        <span className='truncate text-sm font-bold text-text-primary'>
           {user.name}
-        </p>
+        </span>
 
-        <p className='truncate text-sm tracking-tight text-text-secondary'>
+        <span className='truncate text-sm text-text-secondary'>
           @{user.username}
-        </p>
+        </span>
       </div>
-    </button>
+    </Link>
   );
 }
