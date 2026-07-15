@@ -20,7 +20,10 @@ export default function LikesDialog({
     <>
       <div className='hidden md:block'>
         <Dialog open={open} onOpenChange={onOpenChange}>
-          <DialogContent showCloseButton className='max-w-lg p-6'>
+          <DialogContent
+            showCloseButton
+            className='max-w-lg bg-surface-primary p-6'
+          >
             <LikesDialogSection postId={postId} />
           </DialogContent>
         </Dialog>
@@ -31,7 +34,7 @@ export default function LikesDialog({
           <SheetContent
             side='bottom'
             showCloseButton={false}
-            className='rounded-t-2xl p-4'
+            className='rounded-t-2xl bg-surface-primary p-4'
           >
             <LikesDialogSection postId={postId} mobile />
           </SheetContent>
